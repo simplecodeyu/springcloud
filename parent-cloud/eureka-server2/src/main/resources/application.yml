@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 8762
 eureka:
   instance:
     prefer-ip-address: true
@@ -8,4 +8,4 @@ eureka:
     register-with-eureka: false #防止自己向自己注册
     fetch-registry: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:8762/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
