@@ -11,9 +11,9 @@ zuul:
   routes:
     hiapi:
       path: /hiapi/**
-      #serviceId: eureka-client-demo
+      serviceId: eureka-client-demo
       #可以写死也可以写eureka上的域名
-      url: http://localhost:8763
+      #url: http://localhost:8763
     ribbonapi:
       path: /ribbonapi/**
       serviceId: eureka-ribbon-client
