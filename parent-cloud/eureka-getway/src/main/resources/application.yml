@@ -1,0 +1,50 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: query_route
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: after_route
+          uri: http://httpbin.org:80
+          predicates:
+            - After=2022-05-21T12:00:00.129+08:00[Asia/Shanghai]
+  profiles: after_route
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: add_request_header_route
+          uri: http://httpbin.org:80
+          filters:
+            - AddRequestHeader=X-Request-Foo,Bar
+          predicates:
+            - After=2022-05-21T12:00:00.129+08:00[Asia/Shanghai]
+  profiles: add_request_header_route
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: rewritepath_route
+          uri: https://blog.csdn.net
+          predicates:
+            - Path=/foo/**
+          filters:
+            - RewritePath=/foo/(?<segment>.*), /$\{segment}
+  profiles: rewritepath_route
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: query_route
+          uri: http://httpbin.org
+          predicates:
+            - Query=foo, ba.
+  profiles: query_route
